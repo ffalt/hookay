@@ -38,12 +38,12 @@ app.use(bodyParser.json({verify: verify}));
 app.use(express.static('web'));
 
 app.post('/hooks/*', function (req, res) {
-	console.log('incoming request ' + req.params);
+	console.log('incoming request ' + JSON.stringify(req.params));
 	executer.exec({
 		data: req.body,
 		name: req.params
 	});
-	res.send(200);
+	res.sendStatus(200);
 });
 
 io.on('connection', function (socket) {
