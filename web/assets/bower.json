@@ -1,0 +1,22 @@
+{
+  "name": "Hookay Status Web App",
+  "authors": ["ffalt"],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "https://github.com/ffalt/hookay",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "angular-sanitize": "~1.5.0",
+    "font-awesome": "~4.5.0",
+    "fira": "~0.1.0"
+  }
+}

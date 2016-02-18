@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="StatusApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Hookay Status</title>
+	<link rel="stylesheet" href="assets/bower_components/fira/fira.css">
+	<link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script src="socket.io/socket.io.js"></script>
+	<script src="assets/bower_components/angular/angular.min.js"></script>
+	<script src="assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+	<script src="assets/js/index.js"></script>
+</head>
+<body ng-controller="StatusController">
+<h1>Hookay Status</h1>
+<div class="status-list">
+	<div class="status" ng-repeat="site in sites">
+		<div class="status-header" ng-click="toggle(site)" ng-class="{'open':sites_open[site.name]}">
+			<i class="fa fa-chevron-down"></i> <i class="fa fa-chevron-up"></i> <span class="status-name" ng-bind="site.name"></span>
+			<div class="status-text" ng-class="{'error':site.state=='error','done':site.state=='published'}">
+				<i class="fa fa-spin fa-spinner"></i>
+				<span ng-bind="site.state"></span>
+			</div>
+		</div>
+		<div ng-if="sites_open[site.name]" class="status-content">
+			<div class="tools">
+				<a href ng-click="rebuild(site)">
+					<small><i class="fa fa-refresh"></i> Rebuild</small>
+				</a>
+			</div>
+			<div class="status-log" ng-class="{'error':entry.state=='error'}" ng-repeat="entry in sites_details[site.name].logs">
+				<span class="status-log-time" ng-bind="entry.date | date:'yyyy-MM-dd HH:mm'"></span>
+				<span class="status-log-state" ng-bind="entry.state"></span><br/>
+				<span class="status-log-code" ng-bind-html="entry.details | logmsg"></span>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

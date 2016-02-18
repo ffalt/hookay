@@ -1,3 +1,9 @@
+.DS_Store
+config.json
+*.css.map
+data/
+local/
 _site/
-.sass-cache/
-.jekyll-metadata
+.idea/
+node_modules/
+bower_components/

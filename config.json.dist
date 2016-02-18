@@ -1,0 +1,24 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "path": "/hooks/*",
+    "port": 8181
+  },
+  "secret": "your passphrase",
+  "sites": [
+    {
+      "name": "some site",
+      "branch": "master",
+      "build_path": "./data/somesite/build",
+      "publish_path": "./data/somesite/site",
+      "repro": "https://github.com/somesiteowner/somesite.git"
+    },
+    {
+      "name": "some other site",
+      "branch": "master",
+      "build_path": "./data/someothersite/build",
+      "publish_path": "./data/someothersite/site",
+      "repro": "https://github.com/somesiteowner/someothersite.git"
+    }
+  ]
+}
