@@ -38,6 +38,7 @@ app.use(bodyParser.json({verify: verify}));
 app.use(express.static('web'));
 
 app.post('/hooks/*', function (req, res) {
+	console.log('incoming request ' + req.params);
 	executer.exec({
 		data: req.body,
 		name: req.params
