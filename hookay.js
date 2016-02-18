@@ -43,6 +43,7 @@ app.post('/hooks/*', function (req, res) {
 		data: req.body,
 		name: req.params
 	});
+	res.send(200);
 });
 
 io.on('connection', function (socket) {
