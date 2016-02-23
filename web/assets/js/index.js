@@ -1,9 +1,10 @@
 angular.module('StatusApp', ['ngSanitize'])
-	.controller('StatusController', function ($scope) {
+	.controller('StatusController', function ($scope, $location) {
 		$scope.sites = [];
 		$scope.sites_open = {};
 		$scope.sites_details = {};
-		var socket = io.connect('///');
+		var path = $location.path();
+		var socket = io.connect('///', {path: path + '/socket.io'});
 		socket.on('hello', function (data) {
 			console.log('hello', data);
 			socket.emit('list', {});
