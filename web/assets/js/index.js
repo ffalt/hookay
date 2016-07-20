@@ -7,7 +7,7 @@ angular.module('StatusApp', ['ngSanitize'])
 		var path = window.location ? window.location.pathname : '';
 		var socket = io.connect('///', {path: path + 'socket.io'});
 		socket.on('hello', function (data) {
-			console.log('hello', data);
+			// console.log('hello', data);
 			socket.emit('list', {});
 		});
 		socket.on('list', function (data) {
@@ -31,7 +31,7 @@ angular.module('StatusApp', ['ngSanitize'])
 					}
 				});
 				if ($scope.sites_open[data.name]) {
-					console.log('req details');
+					// console.log('req details');
 					socket.emit('details', {name: data.name});
 				}
 			});
