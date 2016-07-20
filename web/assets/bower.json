@@ -1,6 +1,8 @@
 {
   "name": "Hookay Status Web App",
-  "authors": ["ffalt"],
+  "authors": [
+    "ffalt"
+  ],
   "description": "",
   "main": "",
   "moduleType": [],
@@ -14,9 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.9",
-    "angular-sanitize": "~1.5.0",
-    "font-awesome": "~4.5.0",
-    "fira": "~0.1.0"
+    "angular": "^1.5.7",
+    "angular-sanitize": "^1.5.7",
+    "font-awesome": "^4.6.3",
+    "fira": "^0.1.0"
   }
 }
