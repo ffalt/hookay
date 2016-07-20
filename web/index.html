@@ -18,7 +18,7 @@
 		<div class="status-header" ng-click="toggle(site)" ng-class="{'open':sites_open[site.name]}">
 			<i class="fa fa-chevron-down"></i> <i class="fa fa-chevron-up"></i> <span class="status-name" ng-bind="site.name"></span>
 			<div class="status-text" ng-class="{'error':site.state=='error','done':site.state=='published'}">
-				<i class="fa fa-spin fa-spinner"></i>
+				<i ng-if="site.state!=='idle'" class="fa fa-spin fa-spinner"></i>
 				<span ng-bind="site.state"></span>
 			</div>
 		</div>
