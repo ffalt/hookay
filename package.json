@@ -11,6 +11,11 @@
   "author": {
     "name": "ffalt"
   },
+  "scripts": {
+    "start": "forever start -a --uid \"hookay\" hookay.js",
+    "stop": "forever stop \"hookay\"",
+    "run": "node hookay.js",
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
