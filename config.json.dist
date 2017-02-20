@@ -11,14 +11,17 @@
       "branch": "master",
       "build_path": "./data/somesite/build",
       "publish_path": "./data/somesite/site",
-      "repro": "https://github.com/somesiteowner/somesite.git"
+      "repro": "https://github.com/somesiteowner/somesite.git",
+      "env": {
+        "JEKYLL_ENV": "production"
+      }
     },
     {
       "name": "some other site",
       "branch": "master",
       "build_path": "./data/someothersite/build",
       "publish_path": "./data/someothersite/site",
-      "repro": "https://github.com/somesiteowner/someothersite.git"
+      "repro": "https://github.com/somesiteowner/someothersite.git",
     }
   ]
 }
