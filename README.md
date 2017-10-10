@@ -2,15 +2,15 @@
 listen to webhooks, pull git, call jekyll (and a little web app to view the state)
 
 
-##Requirements
+## Requirements
 
-[http://nodejs.org/](http://nodejs.org/)
+[https://nodejs.org/](https://nodejs.org/)
 
-[http://bower.io/](http://bower.io/)
+[https://bower.io/](https://bower.io/)
 
 
 
-##Installation
+## Installation
 
 run `npm install`
 
