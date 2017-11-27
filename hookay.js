@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 "use strict";
 
-var path = require('path');
 var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
-var fs = require('fs');
+var parseurl = require('parseurl');
 var crypto = require('crypto');
 var socketio = require('socket.io');
 var Executer = require('./lib/executer');
@@ -35,6 +34,16 @@ var verify = function (req, res, buffer) {
 app.use(bodyParser.urlencoded({extended: true, verify: verify}));
 app.use(bodyParser.json({verify: verify}));
 
+app.use('/assets/vendor/*', function (req, res, next) {
+	var pathname = (parseurl.original(req) || {}).pathname || '';
+	var pathnames = pathname.split('/');
+	if (['angular', 'angular-sanitize', 'font-awesome', 'typeface-fira-sans', 'typeface.fira-mono'].indexOf(pathnames[3]) >= 0) {
+		next();
+	} else {
+		res.status(403).send('<h1>403 Forbidden</h1>');
+	}
+});
+app.use('/assets/vendor/', express.static('node_modules'));
 app.use(express.static('web'));
 
 app.post('/hooks/*', function (req, res) {

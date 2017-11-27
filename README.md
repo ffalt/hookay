@@ -6,7 +6,8 @@ listen to webhooks, pull git, call jekyll (and a little web app to view the stat
 
 [https://nodejs.org/](https://nodejs.org/)
 
-[https://bower.io/](https://bower.io/)
+
+[https://npmjs.com/](https://npmjs.com/)
 
 
 
@@ -15,9 +16,6 @@ listen to webhooks, pull git, call jekyll (and a little web app to view the stat
 run `npm install`
 
 copy `config.json.dist` to 'config.json' and fill in your settings
-
-run `bower install` in `/web/assets/`
-
 
 
 ## Run
