@@ -22,7 +22,7 @@
     "url": "https://github.com/ffalt/hookay"
   },
   "contributors": [],
-  "version": "0.0.6",
+  "version": "0.0.7",
   "dependencies": {
     "angular": "^1.7.3",
     "angular-sanitize": "^1.7.3",
