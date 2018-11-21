@@ -12,8 +12,8 @@
     "name": "ffalt"
   },
   "scripts": {
-    "start": "forever start -a --uid \"hookay\" hookay.js",
-    "stop": "forever stop \"hookay\"",
+    "start": "forever start -a --uid \"hookay-hugo\" hookay.js",
+    "stop": "forever stop \"hookay-hugo\"",
     "run": "node hookay.js"
   },
   "license": "MIT",

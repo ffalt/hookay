@@ -91,4 +91,3 @@ io.on('connection', function (socket) {
 server.listen(config.server.port, config.server.host, function () {
 	console.log('Listening on port http://' + config.server.host + ':' + config.server.port);
 });
-
