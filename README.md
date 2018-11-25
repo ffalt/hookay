@@ -15,7 +15,7 @@ if you want to build with jekyll: [https://bundler.io/](https://bundler.io/) is 
 
 Download a release and unzip or clone the release branch
 
-run `git clone https://github.com/ffalt/hookay.git#releases hookay && cd hookay`
+run `git clone https://github.com/ffalt/hookay.git --branch=releases hookay && cd hookay`
 
 run `npm install`
 
