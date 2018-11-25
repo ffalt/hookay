@@ -76,6 +76,17 @@ export class Engine {
 	start(name: string, payload?: any) {
 		const task = this.tasks.find(t => t.opts.id === name);
 		if (task) {
+			if (payload && task.opts.source && task.opts.source.remote) {
+				let branch = task.opts.source.remote.branch;
+				if (payload.ref) {
+					branch = payload.ref.replace('refs/heads/', '');
+				}
+				if (task.opts.source.remote.branch !== branch) {
+					console.log((new Date()).toISOString(), task.opts.id, 'ignoring hook call for not configured branch:', branch);
+					return;
+				}
+			}
+			console.log((new Date()).toISOString(), task.opts.id, 'hook call, executing task');
 			task.run();
 		}
 	}
