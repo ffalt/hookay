@@ -17,7 +17,7 @@ run `git clone https://github.com/ffalt/hookay.git#releases hookay && cd hookay`
 
 run `npm install`
 
-copy `config.json.dist` to 'config.json' and fill in your configuration
+copy `config.json.dist` to `config.json` and fill in your configuration
 
 
 ## Configuration
