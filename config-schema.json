@@ -8,8 +8,9 @@
                     "type": "string"
                 },
                 "build": {
-                    "description": "The generator system to use. \"jekyll\" or \"hugo\"",
+                    "description": "The generator system to use. \"jekyll\" or \"hugo\" or \"copy\"",
                     "enum": [
+                        "copy",
                         "hugo",
                         "jekyll"
                     ],

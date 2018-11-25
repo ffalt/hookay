@@ -61,8 +61,17 @@ class Engine {
                         version: site.hugo.version
                     };
                 }
-                else {
+                else if (site.build === 'copy') {
+                    opts.build.copy = {};
+                }
+                else if (site.build === 'jekyll') {
                     opts.build.jekyll = {};
+                }
+                else if (config.version < 2) {
+                    opts.build.jekyll = {};
+                }
+                else {
+                    return Promise.reject('Missing build mode settings');
                 }
                 const task = new task_1.Task(opts, this.emit.bind(this));
                 yield task.validate();

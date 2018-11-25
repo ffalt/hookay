@@ -1,7 +1,7 @@
 export interface ConfigSite {
     name: string;
     branch: string;
-    build: 'jekyll' | 'hugo';
+    build: 'jekyll' | 'hugo' | 'copy';
     build_path: string;
     publish_path: string;
     repository: string;

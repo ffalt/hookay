@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const deplokay_1 = require("deplokay");
+const copy_git_publish_1 = require("deplokay/dist/lib/action/copy-git-publish");
 class Task {
     constructor(opts, parentEmit) {
         this.opts = opts;
@@ -17,6 +18,9 @@ class Task {
         this.logMsgs = [];
         if (opts.build.hugo) {
             this.action = new deplokay_1.HugoPublishAction(opts, this, this.emit.bind(this));
+        }
+        else if (opts.build.copy) {
+            this.action = new copy_git_publish_1.CopyPublishAction(opts, this, this.emit.bind(this));
         }
         else {
             this.action = new deplokay_1.JekyllPublishAction(opts, this, this.emit.bind(this));
