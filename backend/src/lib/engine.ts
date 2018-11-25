@@ -92,7 +92,7 @@ export class Engine {
 					return;
 				}
 			}
-			console.log((new Date()).toISOString(), task.opts.id, 'hook call, executing task');
+			console.log((new Date()).toISOString(), task.opts.id, (payload ? 'hook' : 'rebuild') + ' call, executing task');
 			task.run();
 		}
 	}
