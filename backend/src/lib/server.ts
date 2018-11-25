@@ -25,7 +25,7 @@ export class Server {
 		this.app.use(express.static(webpath));
 
 		this.app.post(config.server.path || '/hooks/*', (req, res) => {
-			//console.log('incoming request ' + JSON.stringify(req.params));
+			// console.log('incoming request ' + JSON.stringify(req.params));
 			engine.start(req.params[0], req.body);
 			res.sendStatus(200);
 		});
@@ -76,7 +76,7 @@ export class Server {
 		}
 	}
 
-	public start() {
+	start() {
 		const httpserver = this.server.listen(this.port, this.config.server.host, () => {
 			console.log('Listening on port http://' + this.config.server.host + ':' + this.port);
 		});

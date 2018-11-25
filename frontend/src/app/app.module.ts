@@ -10,8 +10,8 @@ const apipath = window.location ? window.location.pathname : '';
 const config: SocketIoConfig = {url: apipath, options: {path: '/socket'}};
 
 export function getBaseLocation() {
-	let paths: string[] = location.pathname.split('/').splice(1, 1);
-	let basePath: string = (paths && paths[0]) || ''; // Default: nothing
+	const paths: string[] = location.pathname.split('/').splice(1, 1);
+	const basePath: string = (paths && paths[0]) || ''; // Default: nothing
 	return '/' + basePath;
 }
 

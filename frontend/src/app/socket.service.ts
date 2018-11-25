@@ -60,26 +60,26 @@ export class SocketService {
 	}
 
 	getList() {
-		return this.socket.fromEvent<{ list: Array<TaskInfo> }>('list')
+		return this.socket.fromEvent<{ list: Array<TaskInfo> }>('list');
 	}
 
 	getNotfiy() {
-		return this.socket.fromEvent<TaskInfo>('notify')
+		return this.socket.fromEvent<TaskInfo>('notify');
 	}
 
 	getDetails() {
-		return this.socket.fromEvent<TaskDetailInfo>('details')
+		return this.socket.fromEvent<TaskDetailInfo>('details');
 	}
 
 	sendMessage(msg: string) {
 		this.socket.emit('msg', msg);
 	}
 
-	public requestDetails(name: string) {
+	requestDetails(name: string) {
 		this.socket.emit('details', {name});
 	}
 
-	public requestRebuild(name: string) {
+	requestRebuild(name: string) {
 		this.socket.emit('rebuild', {name});
 	}
 }

@@ -1,20 +1,19 @@
 import {EmitType, PublishActionOptions} from 'deplokay';
 import {Task, TaskDetailInfo, TaskEmitFunction, TaskInfo} from './task';
-import {Config, ConfigSite} from './config';
+import {Config} from './config';
 
 export class Engine {
 	tasks: Array<Task> = [];
 
 	constructor(private taskEmit: TaskEmitFunction) {
-
 	}
 
-	protected emit(task: Task, type: EmitType, state: string, details: string) {
+	private emit(task: Task, type: EmitType, state: string, details: string) {
 		this.taskEmit(task, state);
 		// console.log(task, type, state, details, nolog);
 	}
 
-	public async loadConfig(config: Config) {
+	async loadConfig(config: Config) {
 		if (config.version === undefined) {
 			config.version = 1;
 		}
@@ -65,16 +64,16 @@ export class Engine {
 		this.tasks = result;
 	}
 
-	public states(): Array<TaskInfo> {
+	states(): Array<TaskInfo> {
 		return this.tasks.map(task => task.info());
 	}
 
-	public details(name: string): TaskDetailInfo {
+	details(name: string): TaskDetailInfo {
 		const task = this.tasks.find(t => t.opts.id === name);
 		return task ? task.details() : {name: 'unknown', state: 'unknown', type: EmitType.ERROR, logs: []};
 	}
 
-	public start(name: string, payload?: any) {
+	start(name: string, payload?: any) {
 		const task = this.tasks.find(t => t.opts.id === name);
 		if (task) {
 			task.run();

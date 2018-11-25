@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EmitType, SocketService, TaskInfo, TaskInfoNode} from './socket.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {EmitType, SocketService, TaskInfo, TaskInfoNode} from './socket.service'
 	templateUrl: 'app.component.html',
 	styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	version: string | undefined;
 	nodes: Array<TaskInfoNode> = [];
 
@@ -59,7 +59,7 @@ export class AppComponent {
 			});
 		this.socketService.getDetails()
 			.subscribe(data => {
-				let node = this.nodes.find(n => n.task.name === data.name);
+				const node = this.nodes.find(n => n.task.name === data.name);
 				if (!node) {
 					this.socketService.requestList();
 				} else {
@@ -69,11 +69,10 @@ export class AppComponent {
 			});
 		this.socketService.getNotfiy()
 			.subscribe(data => {
-				let node = this.nodes.find(n => n.task.name === data.name);
+				const node = this.nodes.find(n => n.task.name === data.name);
 				if (!node) {
 					this.socketService.requestList();
 				} else {
-					console.log('data', data);
 					node.task = data;
 					this.updateNode(node, data);
 					if (node.open) {

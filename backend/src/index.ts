@@ -13,11 +13,12 @@ program
 	.parse(process.argv);
 
 async function run(): Promise<void> {
+	let server: Server;
 	const engine = new Engine((task: Task, state: string) => {
 		server.notify({state: state, name: task.opts.id || ''});
 	});
 	await engine.loadConfig(config);
-	const server = new Server(config, engine, manifest.version);
+	server = new Server(config, engine, manifest.version);
 	server.start();
 }
 
@@ -31,10 +32,10 @@ async function test(): Promise<void> {
 if (program.test) {
 	test().catch(e => {
 		console.error(e);
-	})
+	});
 } else {
 	run().catch(e => {
 		console.error(e);
-	})
+	});
 }
 
