@@ -8,5 +8,5 @@ export declare class Engine {
     loadConfig(config: Config): Promise<undefined>;
     states(): Array<TaskInfo>;
     details(name: string): TaskDetailInfo;
-    start(name: string, payload?: any): void;
+    start(name: string, payload?: any): boolean;
 }

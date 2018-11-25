@@ -9,6 +9,7 @@ const http_1 = __importDefault(require("http"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const path_1 = __importDefault(require("path"));
 const crypto_1 = __importDefault(require("crypto"));
+const helmet_1 = __importDefault(require("helmet"));
 class Server {
     constructor(config, engine, version) {
         this.config = config;
@@ -19,13 +20,19 @@ class Server {
         this.app.set('port', this.port);
         this.server = new http_1.default.Server(this.app);
         this.io = socket_io_1.default(this.server, { path: '/socket' });
-        this.app.use(body_parser_1.default.urlencoded({ extended: true, verify: this.verify }));
-        this.app.use(body_parser_1.default.json({ verify: this.verify }));
+        this.app.use(body_parser_1.default.urlencoded({ extended: true, verify: this.verify.bind(this) }));
+        this.app.use(body_parser_1.default.json({ verify: this.verify.bind(this) }));
+        this.app.use(helmet_1.default());
         const webpath = path_1.default.resolve('dist/static');
         this.app.use(express_1.default.static(webpath));
-        this.app.post(config.server.path || '/hooks/*', (req, res) => {
-            engine.start(req.params[0], req.body);
-            res.sendStatus(200);
+        const listenpath = config.server.path || '/hooks/*';
+        this.app.post(listenpath, (req, res) => {
+            if (engine.start(req.params[0], req.body)) {
+                res.sendStatus(200);
+            }
+            else {
+                res.sendStatus(404);
+            }
         });
         this.io.on('connection', (socket) => {
             socket.emit('hello', { hello: this.version });
@@ -44,9 +51,6 @@ class Server {
             });
         });
     }
-    notify(args) {
-        this.io.emit('notify', args);
-    }
     verify(req, res, buffer) {
         let signature = req.headers['x-hub-signature'];
         if (!this.config.secret || !signature) {
@@ -63,6 +67,9 @@ class Server {
             err.status = 403;
             throw err;
         }
+    }
+    notify(args) {
+        this.io.emit('notify', args);
     }
     start() {
         const httpserver = this.server.listen(this.port, this.config.server.host, () => {

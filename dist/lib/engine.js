@@ -97,12 +97,14 @@ class Engine {
                 }
                 if (task.opts.source.remote.branch !== branch) {
                     console.log((new Date()).toISOString(), task.opts.id, 'ignoring hook call for not configured branch:', branch);
-                    return;
+                    return true;
                 }
             }
             console.log((new Date()).toISOString(), task.opts.id, (payload ? 'hook' : 'rebuild') + ' call, executing task');
             task.run();
+            return true;
         }
+        return false;
     }
 }
 exports.Engine = Engine;

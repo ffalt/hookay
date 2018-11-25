@@ -11,10 +11,10 @@ export declare class Server {
     private app;
     private io;
     constructor(config: Config, engine: Engine, version: string);
+    verify(req: express.Request, res: express.Response, buffer: Buffer): void;
     notify(args: {
         state: string;
         name: string;
     }): void;
-    verify(req: express.Request, res: express.Response, buffer: Buffer): void;
     start(): void;
 }
