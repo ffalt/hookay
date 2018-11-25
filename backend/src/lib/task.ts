@@ -1,4 +1,5 @@
 import {EmitFunction, EmitType, HugoPublishAction, JekyllPublishAction, PublishActionBase, PublishActionOptions} from 'deplokay';
+import {CopyPublishAction} from 'deplokay/dist/lib/action/copy-git-publish';
 
 export interface TaskLogMsg {
 	state: string;
@@ -27,6 +28,8 @@ export class Task {
 	constructor(public opts: PublishActionOptions, private parentEmit: EmitFunction) {
 		if (opts.build.hugo) {
 			this.action = new HugoPublishAction(opts, this, this.emit.bind(this));
+		} else if (opts.build.copy) {
+			this.action = new CopyPublishAction(opts, this, this.emit.bind(this));
 		} else {
 			this.action = new JekyllPublishAction(opts, this, this.emit.bind(this));
 		}

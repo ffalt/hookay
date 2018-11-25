@@ -77,9 +77,9 @@ interface ConfigSite {
 	 */
 	branch: string;
 	/**
-	 *  The generator system to use. "jekyll" or "hugo"
+	 *  The generator system to use. "jekyll" or "hugo" or "copy"
 	 */
-	build: 'jekyll' | 'hugo';
+	build: 'jekyll' | 'hugo' | 'copy';
 	/**
 	 *  The path where the project is build locally e.g. "./data/myawesomesite.org/build"
 	 */
