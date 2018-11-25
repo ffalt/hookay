@@ -8,8 +8,9 @@ export class HookaySocket extends Socket {
 	constructor() {
 		super({
 			url: '/', options: {
-				path: getBaseLocation() + '/socket',
-				reconnectionAttempts: 15
+				path: (getBaseLocation() !== '/' ? getBaseLocation() : '') + '/socket',
+				reconnectionAttempts: 10,
+				autoConnect: false
 			}
 		});
 	}

@@ -18,13 +18,15 @@
 308 -276 514 25 168 127 309 276 383 125 62 248 70 380 27z"/>
 		</g>
 	</svg> Hookay Status</h1>
-<div class="connecting" *ngIf="!version">
-	<i class="icon-spinner icon-spin"></i> Connecting…
+<div class="connecting" *ngIf="socketService.connecting">
+	<i class="icon-spinner icon-spin"></i> Connecting… <span *ngIf="socketService.reconnectNr>0">try: {{socketService.reconnectNr}}</span>
+</div>
+<div class="connecting" *ngIf="!socketService.connecting && !socketService.connected">
+	Connection failed <a (click)="socketService.connect()">Try again</a>
 </div>
 
-
 <!--https://svgsilh.com/image/1747990.html-->
-<div class="status-list">
+<div class="status-list" *ngIf="socketService.connected">
 	<div class="status" *ngFor="let node of nodes" [ngClass]="{open:node.open}">
 		<div class="status-header" (click)="toggle(node)">
 			<i class="icon-chevron-down"></i> <i class="icon-chevron-up"></i> <span class="status-name">{{node.task.name}}</span>
@@ -34,7 +36,7 @@
 			</div>
 		</div>
 		<div *ngIf="node.open" class="status-content">
-			<div class="tools">
+			<div class="tools" *ngIf="node.isIdle" >
 				<a (click)="rebuild(node)"><i class="icon-cycle"></i> Rebuild</a>
 			</div>
 			<div class="status-log" [ngClass]="{error:entry.state==='error'}" *ngFor="let entry of node.details?.logs">

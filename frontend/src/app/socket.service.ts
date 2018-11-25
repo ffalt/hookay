@@ -34,6 +34,7 @@ export interface TaskInfoNode {
 	details?: TaskDetailInfo;
 	open: boolean;
 	isRunning: boolean;
+	isIdle: boolean;
 	isDone: boolean;
 	isError: boolean;
 }
@@ -43,8 +44,44 @@ export interface TaskInfoNode {
 	providedIn: 'root'
 })
 export class SocketService {
+	connected: boolean = false;
+	connecting: boolean = false;
+	reconnectNr: number = 0;
 
 	constructor(private socket: HookaySocket) {
+
+		socket.on('connect', () => {
+			this.connecting = false;
+			this.connected = true;
+		});
+		socket.on('disconnect', () => {
+			this.connected = false;
+			this.connecting = false;
+		});
+		socket.on('reconnecting', (attemptNumber) => {
+			this.connecting = true;
+			this.connected = false;
+			this.reconnectNr = attemptNumber;
+		});
+		socket.on('reconnect_failed', (error) => {
+			this.connecting = false;
+			this.connected = false;
+		});
+	}
+
+	connect() {
+		if (!this.connecting && !this.connected) {
+			this.reconnectNr = 0;
+			this.connecting = true;
+			this.socket.connect();
+		}
+	}
+
+	disconnect() {
+		this.reconnectNr = 0;
+		this.connecting = false;
+		this.connected = false;
+		this.socket.disconnect();
 	}
 
 	getVersion() {
