@@ -5,7 +5,9 @@ listen to webhooks, pull git, call jekyll or hugo, copy the result to a folder (
 ## Requirements
 
 [https://nodejs.org/](https://nodejs.org/)
+
 [https://npmjs.com/](https://npmjs.com/)
+
 if you want to build with jekyll: [https://bundler.io/](https://bundler.io/) is needed to install a local jekyll per project
 
 
@@ -167,24 +169,28 @@ You can start the server in background with other systems
 [forever](https://www.npmjs.com/package/forever)
 
 start in background:
+
 `forever start -a --uid "hookay" hookay.js`
 
 stop: 
+
 `forever stop "hookay"`
 
 
 [pm2](http://pm2.keymetrics.io/docs/usage/quick-start/)
 
 start in background:
+
 `pm2 start hookay.js --name hookay`
 
 stop: 
+
 `pm2 stop hookay`
 
 
 ## nginx
 
-TODO: Document an example config
+Have a look at the [example config](https://github.com/ffalt/hookay/blob/master/resource/nginx-site-example)
 
 
 ## References
