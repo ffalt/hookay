@@ -1,6 +1,6 @@
 {
 	"name": "hookay",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "listen to webhooks, pull git, call jekyll or hugo, copy the result to a folder (and a little web app to view the state)",
 	"main": "hookay.js",
 	"scripts": {
