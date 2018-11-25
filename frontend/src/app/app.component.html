@@ -1,0 +1,47 @@
+<h1>
+	<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+		 width="32" height="32" viewBox="0 0 640.000000 1280.000000"
+		 preserveAspectRatio="xMidYMid meet">
+		<circle r="600" fill="#dedede" cx="320" cy="640"></circle>
+		<g transform="translate(80.000000,1100.000000) scale(0.070000,-0.070000)"
+		   fill="#000000" stroke="none">
+			<path d="M5280 12781 c-176 -38 -316 -117 -442 -249 -300 -314 -319 -787 -45
+-1131 87 -109 247 -221 387 -269 l30 -11 0 -4253 c0 -2781 -3 -4283 -10 -4338
+-36 -303 -123 -577 -261 -823 -420 -746 -1247 -1216 -2139 -1217 -877 -1
+-1652 505 -2024 1320 -80 176 -153 428 -175 610 -7 52 -13 105 -15 118 -4 28
+-11 28 215 -3 242 -32 439 -53 439 -46 0 7 -1088 1293 -1126 1331 l-25 25 4
+-695 c4 -752 3 -747 63 -1020 114 -518 386 -999 778 -1378 525 -507 1220 -773
+1951 -749 459 16 845 112 1260 317 563 277 1015 724 1280 1265 130 265 197
+478 252 795 17 100 18 326 23 4423 l5 4318 73 30 c260 104 459 342 517 619 20
+93 19 251 -1 348 -64 312 -300 562 -615 652 -108 31 -287 36 -399 11z m335
+-363 c231 -75 378 -320 336 -557 -60 -333 -416 -515 -716 -367 -192 95 -306
+308 -276 514 25 168 127 309 276 383 125 62 248 70 380 27z"/>
+		</g>
+	</svg> Hookay Status</h1>
+<div class="connecting" *ngIf="!version">
+	<i class="icon-spinner icon-spin"></i> Connecting…
+</div>
+
+
+<!--https://svgsilh.com/image/1747990.html-->
+<div class="status-list">
+	<div class="status" *ngFor="let node of nodes" [ngClass]="{open:node.open}">
+		<div class="status-header" (click)="toggle(node)">
+			<i class="icon-chevron-down"></i> <i class="icon-chevron-up"></i> <span class="status-name">{{node.task.name}}</span>
+			<div class="status-text" [ngClass]="{error:node.isError,done:node.isDone}">
+				<i *ngIf="node.isRunning" class="icon-spinner icon-spin"></i>
+				<span>{{node.task.state}}</span>
+			</div>
+		</div>
+		<div *ngIf="node.open" class="status-content">
+			<div class="tools">
+				<a (click)="rebuild(node)"><i class="icon-cycle"></i> Rebuild</a>
+			</div>
+			<div class="status-log" [ngClass]="{error:entry.state==='error'}" *ngFor="let entry of node.details?.logs">
+				<span class="status-log-time">{{entry.date | date:'yyyy-MM-dd HH:mm'}}</span>
+				<span class="status-log-state">{{entry.state}}</span><br/>
+				<span class="status-log-code"><div *ngFor="let d of entry.detailsSL">{{d}}</div></span>
+			</div>
+		</div>
+	</div>
+</div>

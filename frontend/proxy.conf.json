@@ -1,0 +1,7 @@
+{
+  "/socket/*": {
+    "target": "http://localhost:8181/socket/",
+    "ws": true,
+    "logLevel": "warn"
+  }
+}

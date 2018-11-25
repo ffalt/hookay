@@ -1,0 +1,33 @@
+{
+  "id": "hookay-deploy",
+  "source": {
+    "local": {
+      "path": "."
+    }
+  },
+  "publish": {
+    "archive": {
+      "path": "./local/archives"
+    },
+    "folder": {
+      "path": "./local/release"
+    }
+  },
+  "build": {
+    "npm": {
+      "cmd_name": "build:deploy",
+      "slim_package": true,
+      "component_names": [
+        "dist",
+        "hookay.js",
+        "LICENSE",
+        "config.json.dist",
+        "config-schema.json",
+        "package.json"
+      ]
+    }
+  },
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

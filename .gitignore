@@ -1,9 +1,7 @@
 .DS_Store
 config.json
-*.css.map
 data/
 local/
-_site/
+dist/
 .idea/
 node_modules/
-bower_components/

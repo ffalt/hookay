@@ -1,0 +1,26 @@
+@import "styles/fonts/icomoon/style.css";
+@import "styles/fonts/fira-sans/style.css";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Sans';
+}
+
+h1 {
+  text-align: center;
+}
+
+@keyframes anim-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-spin {
+  display: inline-block;
+  animation: anim-rotate 2s infinite linear;
+}

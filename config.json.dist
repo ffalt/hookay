@@ -1,27 +1,35 @@
 {
+  "$schema": "config-schema.json",
+  "version": 2,
   "server": {
     "host": "0.0.0.0",
     "path": "/hooks/*",
     "port": 8181
   },
-  "secret": "your passphrase",
+  "secret": "your token",
   "sites": [
     {
-      "name": "some site",
+      "name": "some jekyll site",
       "branch": "master",
-      "build_path": "./data/somesite/build",
-      "publish_path": "./data/somesite/site",
-      "repro": "https://github.com/somesiteowner/somesite.git",
+      "build": "jekyll",
+      "build_path": "/var/www/somesite/build",
+      "publish_path": "/var/www/somesite/site",
+      "repository": "https://github.com/somesiteowner/somesite.git",
       "env": {
         "JEKYLL_ENV": "production"
       }
     },
     {
-      "name": "some other site",
+      "name": "some hugo site",
       "branch": "master",
-      "build_path": "./data/someothersite/build",
-      "publish_path": "./data/someothersite/site",
-      "repro": "https://github.com/somesiteowner/someothersite.git",
+      "build": "hugo",
+      "build_path": "/var/www/somehugosite/build",
+      "publish_path": "/var/www/somehugosite/site",
+      "hugo": {
+        "extended": true,
+        "version": "0.51"
+      },
+      "repository": "https://github.com/somesiteowner/somehugosite.git",
     }
   ]
 }

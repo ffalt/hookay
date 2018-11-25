@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      "typeface-fira-sans@0.0.54",
+      "/Users/ffalt/Projekte/public/hookay"
+    ]
+  ],
+  "_from": "typeface-fira-sans@0.0.54",
+  "_id": "typeface-fira-sans@0.0.54",
+  "_inBundle": false,
+  "_integrity": "sha512-WPbYqk8w4YRWWCGOrBDXo0iPUmNdTR3frTq2I16+RSLJMNbIDjRMpbMjmyMipBmXN8bwuvyumCgJ5oGpuzpY3g==",
+  "_location": "/typeface-fira-sans",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "typeface-fira-sans@0.0.54",
+    "name": "typeface-fira-sans",
+    "escapedName": "typeface-fira-sans",
+    "rawSpec": "0.0.54",
+    "saveSpec": null,
+    "fetchSpec": "0.0.54"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/typeface-fira-sans/-/typeface-fira-sans-0.0.54.tgz",
+  "_spec": "0.0.54",
+  "_where": "/Users/ffalt/Projekte/public/hookay",
+  "author": {
+    "name": "Kyle Mathews",
+    "email": "mathews.kyle@gmail.com"
+  },
+  "description": "Fira Sans typeface",
+  "keywords": [
+    "typeface",
+    "font",
+    "font family",
+    "google fonts",
+    "fira-sans"
+  ],
+  "license": "MIT",
+  "main": "index.css",
+  "name": "typeface-fira-sans",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KyleAMathews/typefaces/tree/master/packages/fira-sans"
+  },
+  "version": "0.0.54"
+}

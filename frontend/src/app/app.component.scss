@@ -1,0 +1,148 @@
+.connecting {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 40px;
+}
+
+.status-list {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 760px;
+  padding: 8px;
+
+  .status {
+    border: solid 1px #ececec;
+
+    .status-header {
+      cursor: pointer;
+      padding: 8px;
+
+      .status-text {
+        float: right;
+
+        span {
+          color: blue;
+        }
+
+        i {
+          margin-right: 2px;
+        }
+
+        .icon-spinner {
+          margin-right: 4px;
+        }
+
+        &.error {
+          span {
+            color: red;
+          }
+
+          .icon-spinner {
+            visibility: hidden;
+          }
+        }
+
+        &.done {
+          span {
+            color: green;
+          }
+
+          .icon-spinner {
+            visibility: hidden;
+          }
+        }
+      }
+
+      .icon-chevron-up {
+        display: none;
+      }
+    }
+
+    .tools {
+      margin-bottom: 8px;
+      min-height: 20px;
+      float: right;
+      font-size: 0.8em;
+
+      a {
+        text-decoration: none;
+        border: solid 1px #ececec;
+        border-radius: 4px;
+        padding: 3px;
+        cursor: pointer;
+
+        &:hover {
+          border: solid 1px #d4d4d4;
+        }
+
+      }
+
+      i {
+        margin-top: 1px;
+      }
+    }
+
+    .status-content {
+      background-color: #fefefe;
+      color: #000000;
+      padding: 8px;
+      font-size: 1em;
+      line-height: 1.2em;
+      min-height: 24px;
+
+      .status-log {
+        margin-bottom: 8px;
+        padding-left: 17px;
+
+        .status-log-state {
+          padding-left: 4px;
+          font-weight: bold;
+        }
+
+        .status-log-time {
+          //color: #3a3a3a;
+          font-size: 0.9em;
+        }
+
+        .status-log-code {
+          padding-top: 4px;
+          color: #0e84b5;
+          font-size: 0.7em;
+          line-height: 1.3em;
+          //white-space: nowrap;
+          //font-family: "Courier New";
+          display: block;
+        }
+
+      }
+
+      .status-log.error {
+        .status-log-state {
+          color: red;
+          font-size: 1em;
+        }
+
+        .status-log-code {
+          color: red;
+          font-size: 1em;
+        }
+      }
+
+    }
+
+
+    &.open {
+      .status-header {
+        .icon-chevron-up {
+          display: inline;
+        }
+
+        .icon-chevron-down {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+}
