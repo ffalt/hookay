@@ -11,6 +11,9 @@
     },
     "folder": {
       "path": "./local/release"
+    },
+    "branch": {
+      "branch": "releases"
     }
   },
   "build": {
