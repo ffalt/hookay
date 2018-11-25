@@ -1,19 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
-import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import {SocketIoModule} from 'ngx-socket-io';
 import {SocketService} from './socket.service';
-import {APP_BASE_HREF, Location} from '@angular/common';
-
-const apipath = window.location ? window.location.pathname : '';
-const config: SocketIoConfig = {url: apipath, options: {path: '/socket'}};
-
-export function getBaseLocation() {
-	const paths: string[] = location.pathname.split('/').splice(1, 1);
-	const basePath: string = (paths && paths[0]) || ''; // Default: nothing
-	return '/' + basePath;
-}
+import {APP_BASE_HREF} from '@angular/common';
+import {HookaySocket} from './socket.class';
+import {getBaseLocation} from './basepath.func';
 
 @NgModule({
 	declarations: [
@@ -21,9 +13,10 @@ export function getBaseLocation() {
 	],
 	imports: [
 		BrowserModule,
-		SocketIoModule.forRoot(config)
+		SocketIoModule
 	],
 	providers: [
+		HookaySocket,
 		SocketService,
 		{
 			provide: APP_BASE_HREF,

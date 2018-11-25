@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
-import {Socket} from 'ngx-socket-io';
+import {HookaySocket} from './socket.class';
 
 export enum EmitType {
 	ERROR = 0,
@@ -44,7 +44,7 @@ export interface TaskInfoNode {
 })
 export class SocketService {
 
-	constructor(private socket: Socket) {
+	constructor(private socket: HookaySocket) {
 	}
 
 	getVersion() {
