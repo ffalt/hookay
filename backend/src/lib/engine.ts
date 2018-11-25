@@ -79,7 +79,7 @@ export class Engine {
 		return task ? task.details() : {name: 'unknown', state: 'unknown', type: EmitType.ERROR, logs: []};
 	}
 
-	start(name: string, payload?: any) {
+	start(name: string, payload?: any): boolean {
 		const task = this.tasks.find(t => t.opts.id === name);
 		if (task) {
 			if (payload && task.opts.source && task.opts.source.remote) {
@@ -89,12 +89,14 @@ export class Engine {
 				}
 				if (task.opts.source.remote.branch !== branch) {
 					console.log((new Date()).toISOString(), task.opts.id, 'ignoring hook call for not configured branch:', branch);
-					return;
+					return true;
 				}
 			}
 			console.log((new Date()).toISOString(), task.opts.id, (payload ? 'hook' : 'rebuild') + ' call, executing task');
 			task.run();
+			return true;
 		}
+		return false;
 	}
 }
 

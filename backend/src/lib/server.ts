@@ -6,6 +6,7 @@ import path from 'path';
 import crypto from 'crypto';
 import {Config} from './config';
 import {Engine} from './engine';
+import helmet from 'helmet';
 
 export class Server {
 	private readonly port: number;
@@ -19,17 +20,29 @@ export class Server {
 		this.app.set('port', this.port);
 		this.server = new http.Server(this.app);
 		this.io = socketio(this.server, {path: '/socket'});
-		this.app.use(bodyParser.urlencoded({extended: true, verify: this.verify}));
-		this.app.use(bodyParser.json({verify: this.verify}));
+
+		// post parsers
+		this.app.use(bodyParser.urlencoded({extended: true, verify: this.verify.bind(this)}));
+		this.app.use(bodyParser.json({verify: this.verify.bind(this)}));
+
+		// hide express & stuff
+		this.app.use(helmet());
+
+		// static frontend
 		const webpath = path.resolve('dist/static');
 		this.app.use(express.static(webpath));
 
-		this.app.post(config.server.path || '/hooks/*', (req, res) => {
-			// console.log('incoming request ' + JSON.stringify(req.params));
-			engine.start(req.params[0], req.body);
-			res.sendStatus(200);
+		// post function
+		const listenpath = config.server.path || '/hooks/*';
+		this.app.post(listenpath, (req, res) => {
+			if (engine.start(req.params[0], req.body)) {
+				res.sendStatus(200);
+			} else {
+				res.sendStatus(404);
+			}
 		});
 
+		// frontend socket
 		this.io.on('connection', (socket: socketio.Socket) => {
 			socket.emit('hello', {hello: this.version});
 
@@ -50,12 +63,6 @@ export class Server {
 				sendList();
 			});
 		});
-
-
-	}
-
-	notify(args: { state: string, name: string }) {
-		this.io.emit('notify', args);
 	}
 
 	verify(req: express.Request, res: express.Response, buffer: Buffer) {
@@ -74,6 +81,10 @@ export class Server {
 			(<any>err).status = 403;
 			throw err;
 		}
+	}
+
+	notify(args: { state: string, name: string }) {
+		this.io.emit('notify', args);
 	}
 
 	start() {
