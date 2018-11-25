@@ -1,0 +1,51 @@
+{
+	"name": "hookay",
+	"version": "0.2.0",
+	"description": "listen to webhooks, pull git, call jekyll or hugo, copy the result to a folder (and a little web app to view the state)",
+	"main": "hookay.js",
+	"scripts": {
+		"start": "node hookay.js",
+		"build:clean": "rimraf dist",
+		"build:deploy": "npm run build:clean && npm run build:backend && npm run build:frontend",
+		"build:backend": "cd backend && tsc",
+		"build:frontend": "cd frontend && ng build --prod",
+		"build:config-schema": "typescript-json-schema \"backend/tsconfig.json\" \"Config\" --required -o config-schema.json",
+		"develop:frontend": "cd frontend && ng serve --proxy-config proxy.conf.json",
+		"develop:lint:frontend": "cd frontend && tslint --project tsconfig.json",
+		"develop:lint:backend": "cd backend && tslint --project tsconfig.json",
+		"develop:lint": "npm run develop:lint:frontend && npm run develop:lint:backend",
+		"release": "deplokay -c ./deplokay.json"
+	},
+	"dependencies": {
+		"body-parser": "1.18.3",
+		"commander": "^2.19.0",
+		"deplokay": "github:ffalt/deplokay#releases",
+		"express": "^4.16.3",
+		"simple-git": "^1.96.0",
+		"socket.io": "^2.1.1"
+	},
+	"engines": {
+		"node": ">= 8.0.0"
+	},
+	"private": true,
+	"keywords": [
+		"webhook",
+		"github",
+		"jekyll",
+		"hugo",
+		"git"
+	],
+	"author": {
+		"name": "ffalt"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ffalt/hookay.git"
+	},
+	"license": "MIT",
+	"contributors": [],
+	"bugs": {
+		"url": "https://github.com/ffalt/hookay/issues"
+	},
+	"homepage": "https://github.com/ffalt/hookay#readme"
+}
