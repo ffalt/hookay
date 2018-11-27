@@ -162,6 +162,39 @@ run `node hookay.js` to start the server
 run `node hookay.js -t ` to test your config and exit (can be executed while server is running)
 
 
+## Webhooks
+
+Example on github, replace values in spare brackets with your values: 
+
+* go to https://github.com/[you]/[yourproject]/settings/hooks
+
+  and add a webhook
+
+* enter Payload URL
+
+  `https:[server-name/ip where hookay is running]/[config.server.path]/[config.sites.name]`
+
+  * example 
+
+    server-name: build.yourserver.com
+  
+    config.server.path: /hooks/*
+  
+    config.sites.name: yourproject/master
+  
+    => `https://build.yourserver.com/hooks/yourproject/master`
+
+* choose Content type
+
+  hookay supports `application/json` and `application/x-www-form-urlencoded`
+
+* enter your Secret
+
+  `[config.secret]`
+
+* ready to test
+
+
 ## Running
 
 You can start the server in background with other systems
