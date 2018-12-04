@@ -197,7 +197,7 @@ Example on github, replace values in spare brackets with your values:
 
 ## Running
 
-You can start the server in background with other systems
+You can start the server in background with nodejs process managers
 
 [forever](https://www.npmjs.com/package/forever)
 
