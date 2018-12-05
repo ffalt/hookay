@@ -14,13 +14,14 @@ export class Engine {
 	}
 
 	async loadConfig(config: Config) {
-		if (config.version === undefined) {
-			config.version = 1;
+		let version = 1;
+		if (config.version !== undefined) {
+			version = config.version;
 		}
-		if (config.version < 2) {
+		if (version < 2) {
 			console.error('DEPRECATION WARNING: You are using the old config format, please update your settings');
 		}
-		if (config.version > 2) {
+		if (version > 2) {
 			return Promise.reject('Unknown config version ' + config.version);
 		}
 		const result = [];
@@ -35,7 +36,7 @@ export class Engine {
 					remote: {
 						checkout_path: site.build_path,
 						branch: site.branch,
-						repository: (config.version === 2) ? site.repository : (<any>site).repro,
+						repository: site.repository || (<any>site).repro,
 					}
 				},
 				build: {},
