@@ -110,9 +110,8 @@
             "type": "array"
         },
         "version": {
-            "description": "The version of the config file format e.g. 2",
+            "description": "The version of the config file format, must be 2 at the moment",
             "enum": [
-                1,
                 2
             ],
             "type": "number"
@@ -121,7 +120,8 @@
     "required": [
         "secret",
         "server",
-        "sites"
+        "sites",
+        "version"
     ],
     "type": "object"
 }

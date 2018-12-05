@@ -35,9 +35,9 @@ interface Config {
 	 */
 	$schema?: string;
 	/**
-	 * The version of the config file format e.g. 2
+	 * The version of the config file format, must be 2 at the moment
 	 */
-	version?: 1 | 2;
+	version: 2;
 	/**
 	 * Server settings
 	 */
