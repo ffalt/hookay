@@ -64,7 +64,9 @@ export class Engine {
 			} else {
 				return Promise.reject('Missing build mode settings');
 			}
-			const task = new Task(opts, this.emit.bind(this));
+			const task = new Task(opts,async (task, type, state, details) => {
+				return this.emit(task, type, state, details);
+			});
 			await task.validate();
 			result.push(task);
 		}

@@ -27,11 +27,17 @@ export class Task {
 
 	constructor(public opts: PublishActionOptions, private parentEmit: EmitFunction) {
 		if (opts.build.hugo) {
-			this.action = new HugoPublishAction(opts, this, this.emit.bind(this));
+			this.action = new HugoPublishAction(opts, this, async (task, type, state, details) => {
+				return this.emit(task, type, state, details);
+			});
 		} else if (opts.build.copy) {
-			this.action = new CopyPublishAction(opts, this, this.emit.bind(this));
+			this.action = new CopyPublishAction(opts, this, async (task, type, state, details) => {
+				return this.emit(task, type, state, details);
+			});
 		} else {
-			this.action = new JekyllPublishAction(opts, this, this.emit.bind(this));
+			this.action = new JekyllPublishAction(opts, this, async (task, type, state, details) => {
+				return this.emit(task, type, state, details);
+			});
 		}
 	}
 
