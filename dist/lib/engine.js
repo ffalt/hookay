@@ -20,13 +20,14 @@ class Engine {
     }
     loadConfig(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (config.version === undefined) {
-                config.version = 1;
+            let version = 1;
+            if (config.version !== undefined) {
+                version = config.version;
             }
-            if (config.version < 2) {
+            if (version < 2) {
                 console.error('DEPRECATION WARNING: You are using the old config format, please update your settings');
             }
-            if (config.version > 2) {
+            if (version > 2) {
                 return Promise.reject('Unknown config version ' + config.version);
             }
             const result = [];
@@ -41,7 +42,7 @@ class Engine {
                         remote: {
                             checkout_path: site.build_path,
                             branch: site.branch,
-                            repository: (config.version === 2) ? site.repository : site.repro,
+                            repository: site.repository || site.repro,
                         }
                     },
                     build: {},
@@ -73,7 +74,9 @@ class Engine {
                 else {
                     return Promise.reject('Missing build mode settings');
                 }
-                const task = new task_1.Task(opts, this.emit.bind(this));
+                const task = new task_1.Task(opts, (task, type, state, details) => __awaiter(this, void 0, void 0, function* () {
+                    return this.emit(task, type, state, details);
+                }));
                 yield task.validate();
                 result.push(task);
             }

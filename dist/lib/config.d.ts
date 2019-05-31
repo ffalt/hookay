@@ -15,7 +15,7 @@ export interface ConfigSite {
 }
 export interface Config {
     $schema?: string;
-    version?: 1 | 2;
+    version: 2;
     server: {
         host: string;
         port: number;

@@ -17,13 +17,19 @@ class Task {
         this.isRunning = false;
         this.logMsgs = [];
         if (opts.build.hugo) {
-            this.action = new deplokay_1.HugoPublishAction(opts, this, this.emit.bind(this));
+            this.action = new deplokay_1.HugoPublishAction(opts, this, (task, type, state, details) => __awaiter(this, void 0, void 0, function* () {
+                return this.emit(task, type, state, details);
+            }));
         }
         else if (opts.build.copy) {
-            this.action = new copy_git_publish_1.CopyPublishAction(opts, this, this.emit.bind(this));
+            this.action = new copy_git_publish_1.CopyPublishAction(opts, this, (task, type, state, details) => __awaiter(this, void 0, void 0, function* () {
+                return this.emit(task, type, state, details);
+            }));
         }
         else {
-            this.action = new deplokay_1.JekyllPublishAction(opts, this, this.emit.bind(this));
+            this.action = new deplokay_1.JekyllPublishAction(opts, this, (task, type, state, details) => __awaiter(this, void 0, void 0, function* () {
+                return this.emit(task, type, state, details);
+            }));
         }
     }
     emit(task, type, state, details) {
