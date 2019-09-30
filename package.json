@@ -21,7 +21,7 @@
     "commander": "^2.20.0",
     "deplokay": "^0.0.7",
     "express": "^4.17.1",
-    "helmet": "^3.18.0",
+    "helmet": "^3.21.1",
     "simple-git": "^1.118.0",
     "socket.io": "^2.2.0"
   },
