@@ -19,7 +19,7 @@
   "dependencies": {
     "body-parser": "1.19.0",
     "commander": "4.1.1",
-    "deplokay": "0.0.11",
+    "deplokay": "0.0.12",
     "express": "4.17.1",
     "helmet": "3.21.3",
     "simple-git": "1.131.0",
