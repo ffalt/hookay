@@ -16,6 +16,7 @@
       "publish_path": "/var/www/somesite/site",
       "repository": "https://github.com/somesiteowner/somesite.git",
       "env": {
+        "BUNDLE": "/usr/local/opt/ruby/bin/bundle"
         "JEKYLL_ENV": "production"
       }
     },
