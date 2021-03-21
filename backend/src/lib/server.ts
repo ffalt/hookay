@@ -66,21 +66,21 @@ export class Server {
 		let signature = req.headers['x-hub-signature'];
 		if (!this.config.secret || !signature) {
 			const err = new Error('No Signature :.(');
-			(<any>err).status = 403;
+			(err as any).status = 403;
 			throw err;
 		}
-		signature = Array.isArray(signature) ? signature[0] : <string>signature;
+		signature = Array.isArray(signature) ? signature[0] : signature as string;
 		const hmac = crypto.createHmac('sha1', this.config.secret);
 		const recieved_sig = signature.split('=')[1];
 		const computed_sig = hmac.update(buffer).digest('hex');
 		if (recieved_sig !== computed_sig) {
 			const err = new Error('Invalid Signature :.(');
-			(<any>err).status = 403;
+			(err as any).status = 403;
 			throw err;
 		}
 	}
 
-	notify(args: { state: string, name: string }) {
+	notify(args: { state: string; name: string }) {
 		this.io.emit('notify', args);
 	}
 

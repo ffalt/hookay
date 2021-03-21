@@ -27,17 +27,14 @@ export class Task {
 
 	constructor(public opts: PublishActionOptions, private parentEmit: EmitFunction) {
 		if (opts.build.hugo) {
-			this.action = new HugoPublishAction(opts, this, async (task, type, state, details) => {
-				return this.emit(task, type, state, details);
-			});
+			this.action = new HugoPublishAction(opts, this, async (task, type, state, details) =>
+				this.emit(task, type, state, details));
 		} else if (opts.build.copy) {
-			this.action = new CopyPublishAction(opts, this, async (task, type, state, details) => {
-				return this.emit(task, type, state, details);
-			});
+			this.action = new CopyPublishAction(opts, this, async (task, type, state, details) =>
+				this.emit(task, type, state, details));
 		} else {
-			this.action = new JekyllPublishAction(opts, this, async (task, type, state, details) => {
-				return this.emit(task, type, state, details);
-			});
+			this.action = new JekyllPublishAction(opts, this, async (task, type, state, details) =>
+				this.emit(task, type, state, details));
 		}
 	}
 
@@ -51,21 +48,13 @@ export class Task {
 		}
 	}
 
-	private getLastLog(): TaskLogMsg {
-		let last = this.logMsgs[this.logMsgs.length - 1];
-		if (!last) {
-			last = {state: 'idle', type: EmitType.DONE, details: '', date: Date.now()};
-		}
-		return last;
-	}
-
 	info(): TaskInfo {
 		const last = this.getLastLog();
 		return {name: this.opts.id || '', state: last.state, type: last.type};
 	}
 
 	details(): TaskDetailInfo {
-		const result = <TaskDetailInfo>this.info();
+		const result = this.info() as TaskDetailInfo;
 		result.logs = this.logMsgs;
 		return result;
 	}
@@ -87,4 +76,13 @@ export class Task {
 	async validate() {
 		await this.action.validateOptions();
 	}
+
+	private getLastLog(): TaskLogMsg {
+		let last = this.logMsgs[this.logMsgs.length - 1];
+		if (!last) {
+			last = {state: 'idle', type: EmitType.DONE, details: '', date: Date.now()};
+		}
+		return last;
+	}
+
 }

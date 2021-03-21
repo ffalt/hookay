@@ -13,9 +13,10 @@ program
 	.parse(process.argv);
 
 async function run(): Promise<void> {
+	// eslint-disable-next-line prefer-const
 	let server: Server;
 	const engine = new Engine((task: Task, state: string) => {
-		server.notify({state: state, name: task.opts.id || ''});
+		server.notify({state, name: task.opts.id || ''});
 	});
 	await engine.loadConfig(config);
 	server = new Server(config, engine, manifest.version);

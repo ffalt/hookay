@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 			if (node.open) {
 				this.socketService.requestDetails(node.task.name);
 			}
-		})
+		});
 	}
 
 	rebuild(node: TaskInfoNode) {

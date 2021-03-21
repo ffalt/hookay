@@ -63,7 +63,7 @@ export class SocketService {
 			this.connected = false;
 			this.reconnectNr = attemptNumber;
 		});
-		socket.on('reconnect_failed', (error) => {
+		socket.on('reconnect_failed', () => {
 			this.connecting = false;
 			this.connected = false;
 		});
@@ -87,9 +87,7 @@ export class SocketService {
 	getVersion() {
 		return this.socket
 			.fromEvent<{ hello: string }>('hello')
-			.pipe(
-				map(data => data.hello)
-			);
+			.pipe(map(data => data.hello));
 	}
 
 	requestList() {

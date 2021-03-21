@@ -8,11 +8,6 @@ export class Engine {
 	constructor(private taskEmit: TaskEmitFunction) {
 	}
 
-	private emit(task: Task, type: EmitType, state: string, details: string) {
-		this.taskEmit(task, state);
-		// console.log(task, type, state, details, nolog);
-	}
-
 	async loadConfig(config: Config) {
 		let version = 1;
 		if (config.version !== undefined) {
@@ -36,7 +31,7 @@ export class Engine {
 					remote: {
 						checkout_path: site.build_path,
 						branch: site.branch,
-						repository: site.repository || (<any>site).repro,
+						repository: site.repository || (site as any).repro,
 					}
 				},
 				build: {},
@@ -64,9 +59,7 @@ export class Engine {
 			} else {
 				return Promise.reject('Missing build mode settings');
 			}
-			const task = new Task(opts,async (task, type, state, details) => {
-				return this.emit(task, type, state, details);
-			});
+			const task = new Task(opts, async (t, type, state, details) => this.emit(t, type, state, details));
 			await task.validate();
 			result.push(task);
 		}
@@ -100,6 +93,11 @@ export class Engine {
 			return true;
 		}
 		return false;
+	}
+
+	private emit(task: Task, type: EmitType, state: string, details: string) {
+		this.taskEmit(task, state);
+		// console.log(task, type, state, details, nolog);
 	}
 }
 
