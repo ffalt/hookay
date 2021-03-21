@@ -14,6 +14,7 @@
     "develop:lint:frontend": "cd frontend && tslint --project tsconfig.json",
     "develop:lint:backend": "cd backend && tslint --project tsconfig.json",
     "develop:lint": "npm run develop:lint:frontend && npm run develop:lint:backend",
+    "update:angular": "ng update @angular/cli @angular/core",
     "release": "deplokay -c ./deplokay.json"
   },
   "dependencies": {
