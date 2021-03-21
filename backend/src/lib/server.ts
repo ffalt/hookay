@@ -1,5 +1,4 @@
 import express from 'express';
-import socketio from 'socket.io';
 import http from 'http';
 import bodyParser from 'body-parser';
 import path from 'path';
@@ -7,19 +6,21 @@ import crypto from 'crypto';
 import {Config} from './config';
 import {Engine} from './engine';
 import helmet from 'helmet';
+import SocketIO from 'socket.io';
+import {DefaultEventsMap} from 'socket.io/dist/typed-events';
 
 export class Server {
 	private readonly port: number;
 	private server: http.Server;
 	private app: express.Application;
-	private io: socketio.Server;
+	private io: any;
 
 	constructor(private config: Config, private engine: Engine, private version: string) {
 		this.port = config.server.port || 3000;
 		this.app = express();
 		this.app.set('port', this.port);
 		this.server = new http.Server(this.app);
-		this.io = socketio(this.server, {path: '/socket'});
+		this.io = new SocketIO.Server(this.server, {path: '/socket'});
 
 		// post parsers
 		this.app.use(bodyParser.urlencoded({extended: true, verify: this.verify.bind(this)}));
@@ -43,15 +44,11 @@ export class Server {
 		});
 
 		// frontend socket
-		this.io.on('connection', (socket: socketio.Socket) => {
+		this.io.on('connection', (socket: SocketIO.Socket<DefaultEventsMap, DefaultEventsMap>) => {
 			socket.emit('hello', {hello: this.version});
 
-			const sendList = () => {
+			socket.on('list', (): void => {
 				socket.emit('list', {list: engine.states()});
-			};
-
-			socket.on('list', () => {
-				sendList();
 			});
 
 			socket.on('details', (data: { name: string }) => {
@@ -60,7 +57,7 @@ export class Server {
 
 			socket.on('rebuild', (data: { name: string }) => {
 				engine.start(data.name);
-				sendList();
+				socket.emit('list', {list: engine.states()});
 			});
 		});
 	}

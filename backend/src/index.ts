@@ -29,7 +29,8 @@ async function test(): Promise<void> {
 	console.log('config format is valid');
 }
 
-if (program.test) {
+const options = program.opts();
+if (options.test) {
 	test().catch(e => {
 		console.error(e);
 	});
